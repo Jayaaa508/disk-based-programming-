@@ -1,0 +1,93 @@
+package partitionerexample;
+
+import java.io.*;
+
+import org.apache.hadoop.io.*;
+
+import org.apache.hadoop.conf.*;
+
+import org.apache.hadoop.fs.*;
+
+import org.apache.hadoop.mapreduce.lib.input.*;
+
+{
+
+{
+
+{
+
+String[] str = value.toString().split("\t", -3);
+
+context.write(new Text(gender), new Text(value));
+
+catch(Exception e)
+
+System.out.println(e.getMessage());
+
+}
+
+{
+
+public void reduce(Text key, Iterable <Text> values, Context context) throws IOException, InterruptedException
+
+max = -1;
+
+for (Text val : values)
+
+String [] str = val.toString().split("\t", -3);
+
+max=Integer.parseInt(str[4]);
+
+}
+
+Partitioner < Text, Text >
+
+@Override
+
+{
+
+int age = Integer.parseInt(str[2]);
+
+if(numReduceTasks == 0)
+
+return 0;
+
+{
+
+}
+
+{
+
+}
+
+{
+
+}
+
+}
+
+@Override
+
+{
+
+job.setJarByClass(PartitionerExample.class);
+
+FileInputFormat.setInputPaths(job, new Path(arg[0]));
+
+job.setMapOutputValueClass(Text.class);
+
+//set partitioner statement
+
+job.setPartitionerClass(CaderPartitioner.class);
+
+job.setNumReduceTasks(3);
+
+job.setOutputKeyClass(Text.class);
+
+return 0;
+
+{
+
+System.exit(0);
+
+}
